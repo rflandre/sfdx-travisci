@@ -26,3 +26,7 @@ script:
 - sfdx force:source:push -u ciorg
 - sfdx force:apex:test:run -u ciorg --wait 10
 - sfdx force:org:delete -u ciorg -p
+- sfdx force:source:convert --rootdir force-app --outputdir tmp_convert
+- zip -r tmp_convert.zip tmp_convert
+- sfdx force:mdapi:deploy --zipfile tmp_convert.zip --targetusername renaud.flandre.demo@brave-koala-7ofbea.com
+- sfdx force:mdapi:deploy:report -u HubOrg
